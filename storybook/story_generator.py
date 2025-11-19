@@ -6,7 +6,7 @@ except Exception as e:
     print(f"Error initializing client: {e}")
     client = None
 
-def generate_story_gemini(topic = "adventures of a small robot"):
+def generate_story(topic = "adventures of a small robot"):
     if not client:
         print("Client is not initialized. Cannot generate story.")
         return []
