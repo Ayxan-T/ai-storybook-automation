@@ -1,4 +1,5 @@
 from openai import OpenAI
+import base64
 
 client = OpenAI(api_key="API_KEY")
 
