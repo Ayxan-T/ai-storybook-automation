@@ -14,6 +14,15 @@ def export_story_to_html(chapters, image_files):
 
     html += "</body></html>"
 
+    html_filename = "storybook.html"
+    try:
+        with open(html_filename, "w", encoding="utf-8") as f:
+            f.write(html)
+        print(f"Successfully created {html_filename}")
+    except IOError as e:
+        print(f"Error writing HTML file: {e}")
+        return
+
     # Selenium to open webpage and screenshot it
     opts = Options()
     opts.add_argument("--headless")

@@ -1,7 +1,7 @@
 from google import genai
 
 try:
-    client = genai.Client(api_key="GEMINI_API_KEY")
+    client = genai.Client(api_key="AIzaSyBrQos6LxYKj6utpu1y6KUUSfCEO3kOOTE")
 except Exception as e:
     print(f"Error initializing client: {e}")
     client = None
@@ -13,7 +13,7 @@ def generate_story(topic = "adventures of a small robot"):
 
     # Construct the Prompt (System instruction included)
     prompt = (
-        f"You are a professional children's storyteller. Write a 3-chapter story "
+        f"You are a professional children's storyteller. Write a 2-chapter story "
         f"about {topic}. Each chapter should be around 100 words. "
         f"Use ONLY a double newline ('\\n\\n') to strictly separate the chapters."
     )

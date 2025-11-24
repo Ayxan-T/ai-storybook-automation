@@ -2,7 +2,7 @@ from google import genai
 import os
 
 try:
-    client = genai.Client(api_key="GEMINI_API_KEY")
+    client = genai.Client(api_key="AIzaSyBrQos6LxYKj6utpu1y6KUUSfCEO3kOOTE")
 except Exception as e:
     print(f"Error initializing client: {e}")
     client = None
@@ -17,30 +17,17 @@ def generate_image(prompt, filename = "generated_image.png"):
 
     try:
         # Make  API Call
-        response = client.models.generate_images(
-            model='imagen-3.0-generate-002',
-            prompt=prompt,
-            config=dict(
-                number_of_images=1,
-                # Specify the desired aspect ratio (equivalent to 'size' in the original code)
-                aspect_ratio="1:1" 
-            )
+        response = client.models.generate_content(
+            model='gemini-2.5-flash-image',
+            contents=[prompt],
         )
 
-        if not response.generated_images:
-            print("Image generation failed. No images were returned by the API.")
-            return None
-
-        # Extract the Image Data
-        image_bytes = response.generated_images[0].image.image_bytes
-        
-        if not image_bytes:
-             print("Image bytes could not be extracted from the response.")
-             return None
-
-        # 4. Save the image bytes to a file
-        with open(filename, "wb") as f:
-            f.write(image_bytes)
+        for part in response.parts:
+            if part.text is not None:
+                print(part.text)
+            elif part.inline_data is not None:
+                image = part.as_image()
+                image.save(filename)
         
         print(f"Image successfully saved to {os.path.abspath(filename)}")
         return filename
